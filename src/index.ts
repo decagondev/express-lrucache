@@ -19,6 +19,16 @@ db.run(`
   )
 `);
 
+const addToDB = (idKey: string, audio: string, res: Response) :void => {
+  console.log("adding to cache");
+  db.run('INSERT INTO sounds (idKey, audio) VALUES (?, ?)', [idKey, audio], (err) => {
+      if (err) {
+          return res.status(500).json({ error: err.message });
+      }
+      return res.status(200).json({ success: 'Sound added successfully' });
+  });
+}
+
 
 
 app.get('/', (req: Request, res: Response) => {

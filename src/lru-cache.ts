@@ -96,5 +96,15 @@ export class LRUCache<T> {
     }
 }
 
+const remove = (key : string | null) : void  => console.log("Remove [", key, "]");
+const add = <T>(key : string, value: T) : void  => console.log("Add [", key, "->", value, "]");
 
-export class DLRUCache<T> extends LRUCache<T> {}
+export class DLRUCache<T> extends LRUCache<T> {
+    put(key: string, value: T): boolean {
+      const curTail = {key: this.tail};
+      const isPut = super.put(key, value);
+      if(isPut) remove(curTail.key);
+      add<T>(key, value);
+      return true;
+    }
+}

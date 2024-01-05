@@ -29,6 +29,22 @@ const addToDB = (idKey: string, audio: string, res: Response) :void => {
   });
 }
 
+const addSound = (req: Request, res: Response) => {
+  try {
+    const { idKey, audio } = req.body;
+
+   
+    if (!idKey || !audio) {
+      return res.status(400).json({ error: 'Missing idKey or audio field' });
+    }
+
+    addToDB(idKey, audio, res);
+
+  } catch (error) {
+    return res.status(500).json({ error });
+  }
+}
+
 
 
 app.get('/', (req: Request, res: Response) => {

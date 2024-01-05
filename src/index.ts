@@ -50,6 +50,10 @@ const addSound = (req: Request, res: Response) => {
 
 const getSound = (req: Request, res: Response) => {
   const idKey = req.params.idKey;
+  const cachedItem = cache.get(idKey);
+  if (cachedItem) {
+    return res.status(200).json(cachedItem);
+}
   try {
       db.get('SELECT * FROM sounds WHERE idKey = ?', [idKey], (err, row) => {
           if (err) {

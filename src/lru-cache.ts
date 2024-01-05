@@ -95,3 +95,6 @@ export class LRUCache<T> {
         }
     }
 }
+
+
+export class DLRUCache<T> extends LRUCache<T> {}

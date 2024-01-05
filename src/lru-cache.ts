@@ -34,4 +34,25 @@ export class LRUCache<T> {
         }
         this.cache.delete(key);
     }
+
+    private addToFront(key: string, value: T): void {
+        const newNode = {
+          key,
+          value,
+          prev: null,
+          next: this.head,
+        };
+    
+        if (this.head !== null) {
+          const headNode = this.cache.get(this.head);
+          if (headNode) {
+            headNode.prev = key;
+          }
+        } else {
+          this.tail = key;
+        }
+    
+        this.cache.set(key, newNode);
+        this.head = key;
+    }
 }

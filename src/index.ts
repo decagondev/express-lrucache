@@ -62,6 +62,18 @@ const getSound = (req: Request, res: Response) => {
   }
 }
 
+const getAllSounds = (req: Request, res: Response) => {
+  try {
+      db.all('SELECT * FROM sounds', [], (err, rows) => {
+          if (err) {
+              return res.status(500).json({error: err.message})
+          }
+          return res.status(200).json(rows);
+      });
+  } catch (error) {
+      return res.status(500).json({ error });
+  }
+}
 
 
 app.get('/', (req: Request, res: Response) => {
@@ -70,6 +82,7 @@ app.get('/', (req: Request, res: Response) => {
 
 app.get('/get/:idKey', getSound);
 app.post('/add', addSound);
+
 
 
 app.listen(port, () => {

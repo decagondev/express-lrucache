@@ -55,7 +55,7 @@ export class LRUCache<T> {
         this.cache.set(key, newNode);
         this.head = key;
     }
-    
+
     get(key: string): T | undefined {
         const entry = this.cache.get(key);
         if (entry) {
@@ -65,5 +65,20 @@ export class LRUCache<T> {
             return value;
         }
         return undefined;
-      }
+    }
+
+    protected put(key: string, value: T): boolean {
+        let retVal = false;
+        if (this.cache.has(key)) {
+          this.removeNode(key);
+          retVal = true;
+        } else if (this.cache.size >= this.capacity) {
+          if (this.tail !== null) {
+            this.removeNode(this.tail);
+            retVal = true;
+          }
+        }
+        this.addToFront(key, value);
+        return retVal;
+    }
 }

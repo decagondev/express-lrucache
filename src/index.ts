@@ -1,6 +1,7 @@
 import express, { Express, Request, Response } from 'express';
 import sqlite3 from 'sqlite3';
 import dotenv from 'dotenv';
+import { DLRUCache } from './lru-cache';
 
 dotenv.config();
 
@@ -10,6 +11,8 @@ app.use(express.json());
 
 
 const db = new sqlite3.Database('sounds.db');
+
+const cache = new DLRUCache(500);
 
 db.run(`
   CREATE TABLE IF NOT EXISTS sounds (

@@ -23,7 +23,7 @@ db.run(`
 `);
 
 const addToDB = (idKey: string, audio: string, res: Response) :void => {
-  console.log("adding to cache");
+  cache.put(idKey, audio);
   db.run('INSERT INTO sounds (idKey, audio) VALUES (?, ?)', [idKey, audio], (err) => {
       if (err) {
           return res.status(500).json({ error: err.message });

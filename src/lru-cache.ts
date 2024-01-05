@@ -81,4 +81,17 @@ export class LRUCache<T> {
         this.addToFront(key, value);
         return retVal;
     }
+
+    display(): void {
+        let current = this.head;
+        while (current !== null) {
+          const node = this.cache.get(current);
+          if (node) {
+            console.log(`Key: ${node.key}, Value: ${node.value}`);
+            current = node.next;
+          } else {
+            break;
+          }
+        }
+    }
 }

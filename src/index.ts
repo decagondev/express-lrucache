@@ -45,6 +45,23 @@ const addSound = (req: Request, res: Response) => {
   }
 }
 
+const getSound = (req: Request, res: Response) => {
+  const idKey = req.params.idKey;
+  try {
+      db.get('SELECT * FROM sounds WHERE idKey = ?', [idKey], (err, row) => {
+          if (err) {
+              return res.status(500).json({error: err.message });
+          }
+          if (!row) {
+              return res.status(404).json({error: "Sound not found" });
+          }
+          return res.status(200).json(row);
+      })
+  } catch (error) {
+      return res.status(500).json({ error: error });
+  }
+}
+
 
 
 app.get('/', (req: Request, res: Response) => {

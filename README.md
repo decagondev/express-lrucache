@@ -20,5 +20,5 @@ curl -X GET http://localhost:555/get/someidkey
 ```
 **/add** adds an audio item to the database and returns the item back on success
 ```bash
-curl -X POST -H "Content-Type: application/json" -d '{"idKey":"someidkey", "audio":"someaudiostring"}' http://localhost:555/get
+curl -X POST -H "Content-Type: application/json" -d '{"idKey":"someidkey", "audio":"someaudiostring"}' http://localhost:555/add
 ```

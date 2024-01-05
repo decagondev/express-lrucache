@@ -81,6 +81,7 @@ app.get('/', (req: Request, res: Response) => {
 });
 
 app.get('/get/:idKey', getSound);
+app.get('/get', getAllSounds);
 app.post('/add', addSound);
 
 

@@ -1,4 +1,5 @@
 export class LRUCache<T> {
+    
     private capacity: number;
     private cache: Map<string, { key: string; value: T; prev: string | null; next: string | null }>;
     private head: string | null;

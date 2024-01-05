@@ -55,4 +55,15 @@ export class LRUCache<T> {
         this.cache.set(key, newNode);
         this.head = key;
     }
+    
+    get(key: string): T | undefined {
+        const entry = this.cache.get(key);
+        if (entry) {
+          const value = entry.value;
+            this.removeNode(key);
+            this.addToFront(key, value);
+            return value;
+        }
+        return undefined;
+      }
 }

@@ -10,4 +10,28 @@ export class LRUCache<T> {
       this.head = null;
       this.tail = null;
     }
+
+    private removeNode(key: string): void {
+        const node = this.cache.get(key);
+        if (node) {
+          if (node.prev !== null) {
+            const prevNode = this.cache.get(node.prev);
+            if (prevNode) {
+              prevNode.next = node.next;
+            }
+          } else {
+            this.head = node.next;
+          }
+    
+          if (node.next !== null) {
+            const nextNode = this.cache.get(node.next);
+            if (nextNode) {
+              nextNode.prev = node.prev;
+            }
+          } else {
+            this.tail = node.prev;
+          }
+        }
+        this.cache.delete(key);
+    }
 }
